@@ -25,11 +25,15 @@ public class PlayerController : MonoBehaviour
 
         if (groundCheck == null)
         {
-            Debug.LogError("EL SCRIPT NO ESTA AGREGADO AL CUBO");
+            Debug.LogError("EL SCRIPT GROUNDCHECK NO ESTA ASIGNADO NI ENCONTRADO EN LOS HIJOS");
         }
         if (isjump == null)
         {
-            Debug.LogError("SE DAÑO EL SALTO");
+            Debug.LogError("SE DAÑO EL SALTO - No se encontró la acción 'Jump'");
+        }
+        if (crouchAction == null)
+        {
+            Debug.LogWarning("No se encontró la acción 'Crouch' en el Input System.");
         }
     }
 

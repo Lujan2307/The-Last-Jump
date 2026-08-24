@@ -9,12 +9,28 @@ public class PlayerAnimations : MonoBehaviour
     private static readonly int IsJumpingParameter = Animator.StringToHash("isJumping");
     private static readonly int IsCrouchingParameter = Animator.StringToHash("isCrouching");
 
-    void Update()
+    void Awake()
     {
-        updateMovementAnimation();
+        if (controller == null)
+        {
+            controller = GetComponent<PlayerController>();
+        }
+
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
     }
 
-    private void updateMovementAnimation()
+    void Update()
+    {
+        if (controller != null && animator != null)
+        {
+            UpdateMovementAnimation();
+        }
+    }
+
+    private void UpdateMovementAnimation()
     {
         bool isRunning = controller.MoveValue.sqrMagnitude > 0.1f;
         animator.SetBool(IsRunningParameter, isRunning);
