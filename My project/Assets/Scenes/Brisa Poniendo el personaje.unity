@@ -275,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 606795754}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00003, y: 0.000017, z: -0}
+  m_LocalPosition: {x: 0.000431, y: 0.00004, z: 0}
   m_LocalScale: {x: 0.00012018449, y: 0.0001169919, z: 0.00015060807}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -381,15 +381,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: fe9a74df0ce89b649af7085ad0b72199, type: 3}
       propertyPath: m_LocalScale.x
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fe9a74df0ce89b649af7085ad0b72199, type: 3}
       propertyPath: m_LocalScale.y
-      value: 15.476944
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fe9a74df0ce89b649af7085ad0b72199, type: 3}
       propertyPath: m_LocalScale.z
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fe9a74df0ce89b649af7085ad0b72199, type: 3}
       propertyPath: m_LocalPosition.x
@@ -397,11 +397,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fe9a74df0ce89b649af7085ad0b72199, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fe9a74df0ce89b649af7085ad0b72199, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fe9a74df0ce89b649af7085ad0b72199, type: 3}
       propertyPath: m_LocalRotation.w
@@ -494,9 +494,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!95 &807065874
 Animator:
   serializedVersion: 7
@@ -539,9 +539,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.0014649903
-  m_Height: 0.0078733
+  m_Height: 0.007902517
   m_Direction: 1
-  m_Center: {x: 5.6688636e-19, y: 0.003953887, z: -0.0000729135}
+  m_Center: {x: 4.46047e-18, y: 0.0039392803, z: -0.00007291353}
 --- !u!4 &807065876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fe9a74df0ce89b649af7085ad0b72199, type: 3}
@@ -559,8 +559,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99cbccd0795e22f48a2d908d24b6b753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  velocity: 2
+  velocity: 3
+  crouchSpeedMultiplier: 0.5
   jumpForce: 1
+  floorFacingAngle: 45
 --- !u!114 &807065878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,7 +793,7 @@ GameObject:
   m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!64 &1860752509
 MeshCollider:
@@ -809,7 +811,7 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 0
