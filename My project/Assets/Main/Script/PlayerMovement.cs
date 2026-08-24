@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerInputs.sqrMagnitude <= 0.01f)
         {
-            
+            // Si está detenido, mantiene la rotación actual solo en el eje Y
             rb.rotation = Quaternion.Euler(0f, rb.rotation.eulerAngles.y, 0f);
             return;
         }
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = new Vector3(playerInputs.x, 0f, playerInputs.y);
         Quaternion targetYaw = Quaternion.LookRotation(direction);
 
-        
+        // Rota hacia la dirección del movimiento sin inclinaciones por agacharse
         rb.rotation = targetYaw;
     }
 
