@@ -87,7 +87,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // --- NEW METHOD FOR RESPAWNING ---
+    // re-spawn
+
     public void TeleportTo(Vector3 position, Quaternion rotation)
     {
         rb.position = position;

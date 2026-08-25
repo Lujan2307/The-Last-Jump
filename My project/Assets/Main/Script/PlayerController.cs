@@ -29,11 +29,11 @@ public class PlayerController : MonoBehaviour
         }
         if (isjump == null)
         {
-            Debug.LogError("SE DAÑO EL SALTO - No se encontró la acción 'Jump'");
+            Debug.LogError("SE DAÑO EL SALTO ");
         }
         if (crouchAction == null)
         {
-            Debug.LogWarning("No se encontró la acción 'Crouch' en el Input System.");
+            Debug.LogWarning("crouch se daño.");
         }
     }
 
