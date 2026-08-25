@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Collider Settings")]
     [SerializeField] private float standingHeight = 0.007902517f;
-    [SerializeField] private float crouchingHeight = 0.004f; // Ajusta este valor si lo quieres más pequeño
+    [SerializeField] private float crouchingHeight = 0.004f;
 
     private PlayerController playerController;
     private Rigidbody rb;
@@ -25,10 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (capsuleCollider != null)
         {
-            // Guardamos el centro original cuando está de pie
             standingCenterY = capsuleCollider.center.y;
-
-            // Calculamos automáticamente el centro al agacharse para mantener los pies pegados al suelo
             float heightDifference = standingHeight - crouchingHeight;
             crouchingCenterY = standingCenterY - (heightDifference / 2f);
         }
@@ -88,5 +85,14 @@ public class PlayerMovement : MonoBehaviour
             capsuleCollider.height = standingHeight;
             capsuleCollider.center = new Vector3(capsuleCollider.center.x, standingCenterY, capsuleCollider.center.z);
         }
+    }
+
+    // --- NEW METHOD FOR RESPAWNING ---
+    public void TeleportTo(Vector3 position, Quaternion rotation)
+    {
+        rb.position = position;
+        rb.rotation = rotation;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 }
