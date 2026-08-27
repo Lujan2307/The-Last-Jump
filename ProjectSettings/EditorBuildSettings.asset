@@ -4,5 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: "Assets/Scenes/Mapa (F\xE1cil).unity"
+    guid: 276ef647c39ad8a4397a7c4cfeaef5f5
+  - enabled: 1
+    path: Assets/Scenes/Mapa (Medio).unity
+    guid: 909f8a05e1e361349afd33156cb470f2
+  - enabled: 1
+    path: "Assets/Scenes/Mapa (Dif\xEDcil).unity"
+    guid: dbcfb472e1f53e044944a432b64c977d
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_UseUCBPForAssetBundles: 0
