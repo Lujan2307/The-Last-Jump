@@ -51,12 +51,17 @@ public class UiManager : MonoBehaviour
     private void UpdateVida(float current, float max)
     {
         int vidaActual = Mathf.RoundToInt(current);
+        
 
         for (int i = 0; i < signosDeVida.Length; i++)
         {
             if (signosDeVida[i] != null)
             {
                 signosDeVida[i].SetActive(i < vidaActual);
+            }
+            else
+            {
+                Debug.LogWarning($"[UiManager] signosDeVida[{i}] es null.");
             }
         }
     }
