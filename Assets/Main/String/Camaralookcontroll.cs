@@ -4,77 +4,136 @@ using Unity.Cinemachine;
 
 /// <summary>
 /// Permite mirar hacia arriba (clic izquierdo) o hacia abajo (clic derecho)
-/// modificando el eje de Tilt de un CinemachinePanTilt.
-/// La CinemachineCamera NO debe ser hija del jugador: solo debe tener
-/// asignado el jugador como Follow/Look At target.
+/// modificando el TargetOffset del CinemachineRotationComposer.
+///
+/// El recorrido hacia arriba y hacia abajo se puede configurar
+/// independientemente desde el Inspector.
+///
+/// La CinemachineCamera NO debe ser hija del jugador.
+/// Debe tener asignado el jugador como Follow/Look At target.
 /// </summary>
 [DisallowMultipleComponent]
 public class CameraLookControl : MonoBehaviour
 {
     [Header("Referencia")]
-    [Tooltip("Arrastra aquí el componente CinemachinePanTilt de tu CinemachineCamera")]
-    public CinemachinePanTilt panTilt;
+    [Tooltip("Arrastra aquí el CinemachineRotationComposer de tu CinemachineCamera")]
+    public CinemachineRotationComposer rotationComposer;
 
-    [Header("Configuración de rotación")]
-    [Tooltip("Grados por segundo al mantener presionado el click")]
-    public float velocidadRotacion = 60f;
+    [Header("Velocidad")]
+    [Tooltip("Velocidad con la que la cámara se mueve mientras mantienes el click")]
+    public float velocidadRotacion = 1f;
 
-    [Tooltip("Ángulo máximo mirando hacia arriba")]
-    public float tiltMaximo = 35f;
+    [Header("Recorrido de la cámara")]
+    [Tooltip("Cuánto puede subir la cámara desde su posición inicial")]
+    public float recorridoArriba = 0.5f;
 
-    [Tooltip("Ángulo máximo mirando hacia abajo (negativo)")]
-    public float tiltMinimo = -35f;
+    [Tooltip("Cuánto puede bajar la cámara desde su posición inicial")]
+    public float recorridoAbajo = 0.5f;
 
-    [Tooltip("Si al presionar clic izquierdo la cámara mira hacia abajo en vez de arriba, activa esto")]
+    [Header("Controles")]
+    [Tooltip("Si está activado, invierte arriba y abajo")]
     public bool invertirControles = false;
 
     [Header("Retorno automático")]
-    [Tooltip("Si la cámara vuelve sola al centro al soltar el click")]
+    [Tooltip("La cámara vuelve al centro al soltar el click")]
     public bool volverAlCentro = true;
-    public float velocidadRetorno = 40f;
+
+    [Tooltip("Velocidad con la que vuelve al centro")]
+    public float velocidadRetorno = 1f;
+
+    private float offsetInicialY;
+
+    void Start()
+    {
+        if (rotationComposer == null)
+        {
+            Debug.LogWarning(
+                "CameraLookControl: no se asignó el CinemachineRotationComposer."
+            );
+            return;
+        }
+
+        // Guardamos la posición inicial del TargetOffset
+        offsetInicialY = rotationComposer.TargetOffset.y;
+    }
 
     void Update()
     {
-        if (panTilt == null)
-        {
-            Debug.LogWarning("CameraLookControl: no se asignó el CinemachinePanTilt.");
+        if (rotationComposer == null)
             return;
-        }
+
+        if (Mouse.current == null)
+            return;
 
         float input = 0f;
 
-        if (Mouse.current == null)
-        {
-            Debug.LogWarning("CameraLookControl: no se detectó un mouse (Mouse.current es null).");
-            return;
-        }
+        bool clickIzquierdo = Mouse.current.leftButton.isPressed;
+        bool clickDerecho = Mouse.current.rightButton.isPressed;
 
-        bool clickIzquierdo = Mouse.current.leftButton.isPressed;  // mirar arriba
-        bool clickDerecho = Mouse.current.rightButton.isPressed;   // mirar abajo
+        // ==========================================
+        // CONTROLES
+        // ==========================================
 
         if (invertirControles)
         {
-            if (clickIzquierdo) input = -1f;
-            else if (clickDerecho) input = 1f;
+            // Izquierdo = abajo
+            // Derecho = arriba
+
+            if (clickIzquierdo)
+                input = -1f;
+            else if (clickDerecho)
+                input = 1f;
         }
         else
         {
-            if (clickIzquierdo) input = 1f;
-            else if (clickDerecho) input = -1f;
+            // Izquierdo = arriba
+            // Derecho = abajo
+
+            if (clickIzquierdo)
+                input = 1f;
+            else if (clickDerecho)
+                input = -1f;
         }
 
-        float tiltActual = panTilt.TiltAxis.Value;
+        // ==========================================
+        // TARGET OFFSET
+        // ==========================================
+
+        Vector3 offset = rotationComposer.TargetOffset;
 
         if (input != 0f)
         {
-            tiltActual += input * velocidadRotacion * Time.deltaTime;
+            offset.y += input * velocidadRotacion * Time.deltaTime;
         }
         else if (volverAlCentro)
         {
-            tiltActual = Mathf.MoveTowards(tiltActual, 0f, velocidadRetorno * Time.deltaTime);
+            offset.y = Mathf.MoveTowards(
+                offset.y,
+                offsetInicialY,
+                velocidadRetorno * Time.deltaTime
+            );
         }
 
-        tiltActual = Mathf.Clamp(tiltActual, tiltMinimo, tiltMaximo);
-        panTilt.TiltAxis.Value = tiltActual;
+        // ==========================================
+        // LÍMITES INDEPENDIENTES
+        // ==========================================
+
+        float limiteSuperior =
+            offsetInicialY + recorridoArriba;
+
+        float limiteInferior =
+            offsetInicialY - recorridoAbajo;
+
+        offset.y = Mathf.Clamp(
+            offset.y,
+            limiteInferior,
+            limiteSuperior
+        );
+
+        // ==========================================
+        // APLICAR
+        // ==========================================
+
+        rotationComposer.TargetOffset = offset;
     }
 }

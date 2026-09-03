@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
         isjump = InputSystem.actions.FindAction("Jump");
         crouchAction = InputSystem.actions.FindAction("Crouch");
 
+        // Habilitamos las acciones para asegurar que respondan desde el inicio
+        moveAction?.Enable();
+        isjump?.Enable();
+        crouchAction?.Enable();
+
         if (groundCheck == null)
         {
             groundCheck = GetComponentInChildren<GroundCheck>();

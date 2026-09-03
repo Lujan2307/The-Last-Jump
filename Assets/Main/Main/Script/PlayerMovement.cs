@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+       rb.angularVelocity = Vector3.zero;
+        
         if (playerController == null || !playerController.enabled) return;
 
         RotateTowardsDirection();
@@ -46,15 +48,35 @@ public class PlayerMovement : MonoBehaviour
         HandleCrouchCollider();
     }
 
+    private Vector3 GetCameraRelativeDirection(Vector2 inputs)
+    {
+        if (Camera.main == null)
+        {
+            return new Vector3(inputs.x, 0f, inputs.y);
+        }
+
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        cameraForward.y = 0f;
+        cameraRight.y = 0f;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        return (cameraForward * inputs.y) + (cameraRight * inputs.x);
+    }
+
     public void Move()
     {
         Vector2 playerInputs = playerController.MoveValue;
         float currentSpeed = CurrentSpeed;
 
+        Vector3 moveDirection = GetCameraRelativeDirection(playerInputs);
+
         rb.linearVelocity = new Vector3(
-            playerInputs.x * currentSpeed,
+            moveDirection.x * currentSpeed,
             rb.linearVelocity.y,
-            playerInputs.y * currentSpeed
+            moveDirection.z * currentSpeed
         );
     }
 
@@ -68,9 +90,13 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        Vector3 direction = new Vector3(playerInputs.x, 0f, playerInputs.y);
-        Quaternion targetYaw = Quaternion.LookRotation(direction);
-        rb.rotation = targetYaw;
+        Vector3 moveDirection = GetCameraRelativeDirection(playerInputs);
+
+        if (moveDirection.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetYaw = Quaternion.LookRotation(moveDirection);
+            rb.rotation = targetYaw;
+        }
     }
 
     private void Jump()
