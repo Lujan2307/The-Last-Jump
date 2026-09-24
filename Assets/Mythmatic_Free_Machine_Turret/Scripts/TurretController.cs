@@ -104,19 +104,19 @@ namespace Mythmatic.TurretSystem
         #endregion
 
         // Private tracking variables
-        private GameObject enemy;                    // Current target (Player)
-        private bool isBaseRotating = false;         // Is the base currently rotating?
-        private bool isWeaponRotating = false;       // Is the weapon currently rotating?
-        private float targetWeaponAngle = 0f;        // Target angle for weapon rotation
-        private float currentWeaponAngle = 0f;       // Current weapon angle
-        private bool isInRange = false;              // Is the enemy in attack range?
-        private float nextFireTime = 0f;             // When we can fire next
-        private bool isReadyToFire = false;          // Whether all conditions for firing are met
-        private bool isFiring = false;               // Whether the turret is actively firing
+        private GameObject enemy;                    
+        private bool isBaseRotating = false;         
+        private bool isWeaponRotating = false;       
+        private float targetWeaponAngle = 0f;       
+        private float currentWeaponAngle = 0f;      
+        private bool isInRange = false;              
+        private float nextFireTime = 0f;            
+        private bool isReadyToFire = false;          
+        private bool isFiring = false;              
 
         private void Start()
         {
-            // Search for target tagged "Player"
+            
             enemy = GameObject.FindGameObjectWithTag("Player");
 
             if (enemy == null)
@@ -124,13 +124,13 @@ namespace Mythmatic.TurretSystem
                 Debug.LogWarning("TurretController: No GameObject found with tag 'Player' in the scene!");
             }
 
-            // Validate spawn points
+            
             if (projectileSpawnPoints.Count == 0)
             {
                 Debug.LogWarning("No projectile spawn points assigned to turret. Please assign at least one spawn point in the inspector.");
             }
 
-            // Set up layer collision ignores safely
+            
             int projectileLayer = LayerMask.NameToLayer("Projectile");
             if (projectileLayer != -1)
             {
@@ -144,13 +144,13 @@ namespace Mythmatic.TurretSystem
 
         private void Update()
         {
-            // If enemy wasn't found at Start, attempt to find it
+            
             if (enemy == null)
             {
                 enemy = GameObject.FindGameObjectWithTag("Player");
             }
 
-            // Safety check - make sure we have all required components
+            
             if (enemy == null || weaponMount == null || aimReference == null)
             {
                 Debug.LogWarning("Missing required components: " +
@@ -161,40 +161,40 @@ namespace Mythmatic.TurretSystem
                 return;
             }
 
-            // Check if enemy is in range
+            
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             bool newInRange = distanceToEnemy <= attackRange;
 
-            // Update range status
+            
             if (newInRange != isInRange)
             {
                 isInRange = newInRange;
             }
 
-            // Calculate direction to enemy (ignoring height)
+            
             Vector3 directionToEnemy = (enemy.transform.position - transform.position).normalized;
             Vector3 flatDirection = new Vector3(directionToEnemy.x, 0, directionToEnemy.z);
 
-            // Only proceed if we have a valid direction
+            
             if (flatDirection != Vector3.zero)
             {
-                // Calculate the rotation needed to face the enemy
+                
                 Quaternion targetBaseRotation = Quaternion.LookRotation(flatDirection, Vector3.up);
 
-                // If we're not facing the right direction, rotate the base
+                
                 if (!Mathf.Approximately(Quaternion.Angle(transform.rotation, targetBaseRotation), 0f))
                 {
                     isBaseRotating = true;
                     RotateBase(targetBaseRotation);
                 }
-                // If we just finished rotating the base, calculate weapon rotation
+                
                 else if (isBaseRotating)
                 {
                     isBaseRotating = false;
                     CalculateWeaponRotation();
                 }
 
-                // If base isn't rotating, handle weapon rotation
+                
                 if (!isBaseRotating)
                 {
                     CalculateWeaponRotation();
@@ -204,10 +204,10 @@ namespace Mythmatic.TurretSystem
                     }
                 }
 
-                // Update ready-to-fire status
+                
                 isReadyToFire = isInRange && !isBaseRotating && !isWeaponRotating;
 
-                // Try to fire if everything is aligned and we're in range
+                
                 if (isReadyToFire && Time.time >= nextFireTime)
                 {
                     FireProjectile();
@@ -223,7 +223,7 @@ namespace Mythmatic.TurretSystem
                 UpdateFiringState(false);
             }
 
-            // Draw debug line to show if enemy is in range
+            
             if (enemy != null && aimReference != null)
             {
                 Debug.DrawLine(aimReference.position, enemy.transform.position, Color.blue);
