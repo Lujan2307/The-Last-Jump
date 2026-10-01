@@ -110,18 +110,32 @@ public class PlayerHealth : MonoBehaviour
         if (audioSource != null && audioSource.isPlaying)
             audioSource.Pause();
 
-        if (puntoRespawn != null)
+        
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        
+        if (CheckpointManager.instance != null)
+        {
+            transform.position = CheckpointManager.instance.puntoDeRespawnActual;
+        }
+        
+        else if (puntoRespawn != null)
         {
             transform.position = puntoRespawn.position;
             transform.rotation = puntoRespawn.rotation;
         }
 
+        
         SetJugadorActivo(true);
 
         if (rb != null)
         {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = false;
             rb.WakeUp();
         }
 

@@ -13,6 +13,13 @@ public class Pinchos : MonoBehaviour
     [SerializeField] private float tiempoEntreDaños = 0.5f;
 
     private bool puedeHacerDaño = true;
+    private AudioSource audioSource; 
+
+    private void Awake()
+    {
+        
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -22,16 +29,17 @@ public class Pinchos : MonoBehaviour
         PlayerHealth playerHealth = collision.gameObject.GetComponentInParent<PlayerHealth>();
         if (playerHealth == null) return;
 
-        StartCoroutine(AplicarDaño(playerHealth, collision.transform));
+        StartCoroutine(AplicarDaño(playerHealth));
     }
 
-    private IEnumerator AplicarDaño(PlayerHealth playerHealth, Transform playerTransform)
+    private IEnumerator AplicarDaño(PlayerHealth playerHealth)
     {
         puedeHacerDaño = false;
 
-        if (sonidoDaño != null)
+        
+        if (sonidoDaño != null && audioSource != null)
         {
-            AudioSource.PlayClipAtPoint(sonidoDaño, playerTransform.position, volumen);
+            audioSource.PlayOneShot(sonidoDaño, volumen);
         }
 
         playerHealth.TakeDamage(daño);
