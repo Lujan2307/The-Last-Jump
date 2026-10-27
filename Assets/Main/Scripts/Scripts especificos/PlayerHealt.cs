@@ -39,6 +39,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
+        // Cada vez que carga el nivel, se limpia el checkpoint
+        Checkpoint.HasCheckpoint = false;
+
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody>();
 
@@ -110,7 +113,12 @@ public class PlayerHealth : MonoBehaviour
         if (audioSource != null && audioSource.isPlaying)
             audioSource.Pause();
 
-        if (puntoRespawn != null)
+        if (Checkpoint.HasCheckpoint)
+        {
+            transform.position = Checkpoint.LastCheckpoint;
+            transform.rotation = Checkpoint.LastRotation;
+        }
+        else if (puntoRespawn != null)
         {
             transform.position = puntoRespawn.position;
             transform.rotation = puntoRespawn.rotation;
