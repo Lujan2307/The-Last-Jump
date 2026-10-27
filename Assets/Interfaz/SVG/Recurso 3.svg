@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 195.06 201.09">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ea4c68;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: url(#Degradado_sin_nombre_42-2);
+      }
+
+      .cls-4 {
+        fill: #f5c339;
+      }
+
+      .cls-5 {
+        fill: url(#Degradado_sin_nombre_42);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_42" data-name="Degradado sin nombre 42" x1="81.36" y1="74.45" x2="81.36" y2="122.02" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1d1d1b"/>
+      <stop offset="1" stop-color="#1d1d1b"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_42-2" data-name="Degradado sin nombre 42" x1="113.71" y1="74.45" x2="113.71" y2="122.02" xlink:href="#Degradado_sin_nombre_42"/>
+  </defs>
+  <g id="Capa_2-2" data-name="Capa 2">
+    <g>
+      <path class="cls-4" d="M66.31,52.42s35.73-117.95,71.06,0c0,0,110.8,2.05,25.29,70.44,0,0,40.15,132.7-62.23,52.42,0,0-95.15,75.77-60.62-38.91,0,0-105.25-89.83,26.5-83.96Z"/>
+      <rect class="cls-5" x="72.71" y="67.56" width="17.29" height="65.97" rx="8.65" ry="8.65"/>
+      <rect class="cls-3" x="105.06" y="67.56" width="17.29" height="65.97" rx="8.65" ry="8.65"/>
+      <rect class="cls-2" x="75.89" y="72.35" width="10.93" height="18.6" rx="5.46" ry="5.46"/>
+      <rect class="cls-2" x="108.24" y="72.35" width="10.93" height="18.6" rx="5.46" ry="5.46"/>
+      <ellipse class="cls-1" cx="53.53" cy="133.53" rx="11.9" ry="5.95"/>
+      <ellipse class="cls-1" cx="141.54" cy="133.53" rx="11.9" ry="5.95"/>
+    </g>
+  </g>
+</svg>

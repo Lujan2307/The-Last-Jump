@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264.17 52.3">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fff;
+        stroke: #7272a0;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        font-family: TitanOne, 'Titan One';
+        font-size: 42px;
+      }
+
+      .cls-3 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-4 {
+        letter-spacing: -.06em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-6 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <g id="Capa_2-2" data-name="Capa 2">
+    <g>
+      <text class="cls-2" transform="translate(60.71 36.91)"><tspan class="cls-4" x="0" y="0">P</tspan><tspan class="cls-5" x="27.17" y="0">A</tspan><tspan x="56.91" y="0">U</tspan><tspan class="cls-3" x="87.4" y="0">S</tspan><tspan class="cls-6" x="114.03" y="0">A</tspan></text>
+      <rect class="cls-1" x="17.78" y=".54" width="6" height="16.71" rx="3" ry="3" transform="translate(.54 18.97) rotate(-49.64)"/>
+      <rect class="cls-1" x="10.69" y="9.81" width="6" height="25.39" rx="3" ry="3" transform="translate(-8.81 36.2) rotate(-90)"/>
+      <rect class="cls-1" x="17.78" y="28.69" width="6" height="16.71" rx="3" ry="3" transform="translate(42.47 .53) rotate(60)"/>
+      <path class="cls-1" d="M234.57,30.66h0c1.17-1.25,3.25-1.4,4.63-.34l8.93,6.85c1.38,1.06,1.55,2.93.38,4.17h0c-1.17,1.25-3.25,1.4-4.63.34l-8.93-6.85c-1.38-1.06-1.55-2.93-.38-4.17Z"/>
+      <rect class="cls-1" x="246.33" y="8.69" width="5.92" height="27.77" rx="2.96" ry="2.96" transform="translate(271.86 -226.71) rotate(90)"/>
+      <path class="cls-1" d="M249.46,4.1h0c.91,1.42.37,3.23-1.2,4.04l-10.15,5.29c-1.57.82-3.58.33-4.48-1.08h0c-.91-1.42-.37-3.23,1.2-4.04l10.15-5.29c1.57-.82,3.58-.33,4.48,1.08Z"/>
+    </g>
+  </g>
+</svg>
