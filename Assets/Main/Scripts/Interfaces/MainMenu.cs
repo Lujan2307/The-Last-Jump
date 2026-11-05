@@ -31,7 +31,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("Mapa (Fácil) 1");
+        SceneManager.LoadScene("Mapa (Fï¿½cil) 1");
 
 
     }

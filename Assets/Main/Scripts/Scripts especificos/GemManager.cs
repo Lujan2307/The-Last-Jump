@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GemManager : MonoBehaviour
 {
@@ -25,6 +26,27 @@ public class GemManager : MonoBehaviour
         }
 
         gemasRecolectadas = new bool[gemasNecesarias.Length];
+
+        // Cada vez que se carga una escena (siguiente nivel o reinicio), las gemas se reinician
+        SceneManager.sceneLoaded += AlCargarEscena;
+    }
+
+    private void OnDestroy()
+    {
+        // Solo la instancia original se suscribió al evento
+        if (Instance == this)
+            SceneManager.sceneLoaded -= AlCargarEscena;
+    }
+
+    private void AlCargarEscena(Scene escena, LoadSceneMode modo)
+    {
+        ReiniciarGemas();
+    }
+
+    public void ReiniciarGemas()
+    {
+        gemasRecolectadas = new bool[gemasNecesarias.Length];
+        Debug.Log("Gemas reiniciadas para el nuevo nivel.");
     }
 
     // Llamar esta función cuando el jugador recoja una gema
