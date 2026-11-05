@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/FakeScenes/MainMenu.unity
     guid: 57113a1282a4be94f9c312d8c68911e1
   - enabled: 1
-    path: "Assets/Main/Scenes/Mapa (F\xE1cil) 1.unity"
+    path: Assets/Main/Scenes/Mapa1.unity
     guid: 83d2a4ace296bc44daf9cacd02848e1f
   - enabled: 1
     path: Assets/Main/Scenes/Mapa (Medio) Lujan.unity
