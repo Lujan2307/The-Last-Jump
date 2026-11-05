@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
     [Header("Escudo")]
     [SerializeField] private float maxShield = 50f;
     [SerializeField] private float currentShield = 0f;
+    [Tooltip("Si está activo, el escudo absorbe el golpe completo y desaparece al recibir cualquier daño")]
+    [SerializeField] private bool escudoSeRompeConUnGolpe = true;
 
     [Header("Respawn")]
     [SerializeField] private Transform puntoRespawn;
@@ -56,6 +58,14 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentShield > 0f)
         {
+            if (escudoSeRompeConUnGolpe)
+            {
+                // El escudo absorbe el golpe completo y desaparece
+                currentShield = 0f;
+                OnShieldChanged?.Invoke(currentShield, maxShield);
+                return;
+            }
+
             float absorbed = Mathf.Min(currentShield, amount);
             currentShield -= absorbed;
             amount -= absorbed;
