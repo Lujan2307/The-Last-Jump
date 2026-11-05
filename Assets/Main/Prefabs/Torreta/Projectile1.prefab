@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8923868631564123147}
   - component: {fileID: 1172160363500292606}
   - component: {fileID: 2499497928341872998}
-  - component: {fileID: 4980883814275244948}
   - component: {fileID: -5133632870529097241}
+  - component: {fileID: 4591259307113927327}
   m_Layer: 0
   m_Name: Projectile1
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.042266846, y: 0.08293009, z: 0.25532532}
-  m_LocalScale: {x: 0.032973595, y: 0.032973595, z: 0.032973595}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -114,20 +114,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4980883814275244948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6621482100317957023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd4ad6e940ab4f847b9783370971f411, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TurretProjectile
-  speed: 12
-  damage: 10
 --- !u!54 &-5133632870529097241
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,3 +141,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &4591259307113927327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6621482100317957023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4ad6e940ab4f847b9783370971f411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  speed: 20
+  damage: 1
+  lifeTime: 5
+  logCollisions: 1
