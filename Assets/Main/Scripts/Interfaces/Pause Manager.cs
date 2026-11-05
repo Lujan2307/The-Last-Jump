@@ -1,12 +1,10 @@
 
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class PauseManager : MonoBehaviour
 {
-    [Header("Paneles")]
     public GameObject panelPausa;
     public GameObject panelOpciones;
 
@@ -15,6 +13,7 @@ public class PauseManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
+        estaPausado = false;
 
         panelPausa.SetActive(false);
         panelOpciones.SetActive(false);
@@ -42,44 +41,38 @@ public class PauseManager : MonoBehaviour
 
     public void Pausar()
     {
-        Debug.Log("BOTON PAUSAR FUNCIONA");
-
         estaPausado = true;
-        panelPausa.SetActive(true);
         panelOpciones.SetActive(false);
+        panelPausa.SetActive(true);
         Time.timeScale = 0f;
+        Debug.Log("PAUSA ACTIVADA");
     }
 
     public void Continuar()
     {
-        Debug.Log("BOTON CONTINUAR FUNCIONA");
-
         estaPausado = false;
         panelPausa.SetActive(false);
         panelOpciones.SetActive(false);
         Time.timeScale = 1f;
+        Debug.Log("JUEGO REANUDADO");
     }
 
     public void Opciones()
     {
-        Debug.Log("BOTON OPCIONES FUNCIONA");
-
         panelPausa.SetActive(false);
         panelOpciones.SetActive(true);
+        Debug.Log("OPCIONES ABIERTAS");
     }
 
     public void VolverPausa()
     {
-        Debug.Log("BOTON VOLVER A PAUSA FUNCIONA");
-
         panelOpciones.SetActive(false);
         panelPausa.SetActive(true);
+        Debug.Log("VOLVIENDO A PAUSA");
     }
 
     public void VolverMenu()
     {
-        Debug.Log("BOTON VOLVER AL MENU FUNCIONA");
-
         Time.timeScale = 1f;
         SceneManager.LoadScene("MenuPrincipal");
     }
