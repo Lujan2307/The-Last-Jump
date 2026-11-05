@@ -2,7 +2,7 @@
 - Project name: The-Last-Jump
 - Unity version: Unity 6000.3.9f1
 - Active game object:
-  - Name: Panel Victoria
+  - Name: Canvas
   - Tag: Untagged
   - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
