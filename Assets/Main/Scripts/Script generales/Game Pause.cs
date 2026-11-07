@@ -1,59 +1,66 @@
-using UnityEngine.InputSystem;
+
 using UnityEngine;
-using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 
 public class GamePause : MonoBehaviour
 {
+    public GameObject menuPause;
+    public GameObject menuOpciones;
 
-    private InputAction Pause; 
-
-
-    public GameObject menuPause; 
     public bool gamePaused = false;
-
-    private void Start()
-    {
-        Pause = InputSystem.actions.FindAction("Escape");
-    }
 
     private void Update()
     {
-        if (Pause.WasPressedThisFrame())
+        if (Keyboard.current != null &&
+            Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            Debug.Log("Si está tomando el esc");
-            if (gamePaused)
+            if (menuOpciones.activeSelf)
+            {
+                VolverPausa();
+            }
+            else if (gamePaused)
             {
                 unpause();
-
             }
             else
             {
-
                 pause();
-
             }
         }
     }
-        public void unpause()
-        {
 
-            menuPause.SetActive(false);
+    public void pause()
+    {
+        menuPause.SetActive(true);
+        menuOpciones.SetActive(false);
 
-            Time.timeScale = 1;
-            gamePaused = false;
+        Time.timeScale = 0;
+        gamePaused = true;
+    }
 
-        }
+    public void unpause()
+    {
+        Debug.Log("BOTÓN CONTINUAR FUNCIONA");
+        menuPause.SetActive(false);
+        menuOpciones.SetActive(false);
+        Time.timeScale = 1;
+        gamePaused = false;
+    }
 
-        public void pause()
-        {
-            menuPause.SetActive(true);
-            Time.timeScale = 0;
-            gamePaused = true;
+    public void AbrirOpciones()
+    {
+        Debug.Log("BOTÓN OPCIONES FUNCIONA");
+        menuPause.SetActive(false);
+        menuOpciones.SetActive(true);
+    }
 
+    public void VolverPausa()
+    {
+        menuOpciones.SetActive(false);
+        menuPause.SetActive(true);
+    }
+}
 
-        }
- 
-   }
 
 
 

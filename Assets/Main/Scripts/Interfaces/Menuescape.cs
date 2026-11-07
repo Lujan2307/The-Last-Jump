@@ -4,41 +4,49 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 #endif
 
-// Ponlo en el Canvas "menu escape". El objeto debe quedar ACTIVO en la escena:
-// el script oculta el menú apagando el componente Canvas, no el objeto.
 public class MenuEscape : MonoBehaviour
 {
+    public Canvas canvasOpciones;
+
     private Canvas canvas;
     private GraphicRaycaster raycaster;
     private bool abierto;
-    private CursorLockMode lockPrevio;
-    private bool cursorVisiblePrevio;
+    private bool opcionesAbiertas;
 
     private void Awake()
     {
         canvas = GetComponent<Canvas>();
         raycaster = GetComponent<GraphicRaycaster>();
+
         Mostrar(false);
+
+        if (canvasOpciones != null)
+            canvasOpciones.gameObject.SetActive(false);
+
         Time.timeScale = 1f;
     }
 
     private void Update()
     {
 #if ENABLE_INPUT_SYSTEM
-        bool esc = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
+        bool esc = Keyboard.current != null &&
+                   Keyboard.current.escapeKey.wasPressedThisFrame;
 #else
         bool esc = Input.GetKeyDown(KeyCode.Escape);
 #endif
+
         if (!esc) return;
 
         if (!abierto)
         {
-            lockPrevio = Cursor.lockState;
-            cursorVisiblePrevio = Cursor.visible;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
             Time.timeScale = 0f;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             Mostrar(true);
+        }
+        else if (opcionesAbiertas)
+        {
+            VolverPausa();
         }
         else
         {
@@ -46,20 +54,42 @@ public class MenuEscape : MonoBehaviour
         }
     }
 
-    // Úsalo también en el OnClick de un botón "Continuar"
     public void Reanudar()
     {
         Mostrar(false);
+
+        if (canvasOpciones != null)
+            canvasOpciones.gameObject.SetActive(false);
+
+        opcionesAbiertas = false;
         Time.timeScale = 1f;
-        Cursor.lockState = lockPrevio;
-        Cursor.visible = cursorVisiblePrevio;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void AbrirOpciones()
+    {
+        Mostrar(false);
+        canvasOpciones.gameObject.SetActive(true);
+        opcionesAbiertas = true;
+    }
+
+    public void VolverPausa()
+    {
+        canvasOpciones.gameObject.SetActive(false);
+        opcionesAbiertas = false;
+        Mostrar(true);
     }
 
     private void Mostrar(bool valor)
     {
         abierto = valor;
-        if (canvas != null) canvas.enabled = valor;
-        if (raycaster != null) raycaster.enabled = valor;
+
+        if (canvas != null)
+            canvas.enabled = valor;
+
+        if (raycaster != null)
+            raycaster.enabled = valor;
     }
 
     private void OnDestroy()

@@ -1,4 +1,5 @@
 
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
@@ -61,19 +62,22 @@ public class PauseManager : MonoBehaviour
     {
         panelPausa.SetActive(false);
         panelOpciones.SetActive(true);
-        Debug.Log("OPCIONES ABIERTAS");
     }
 
     public void VolverPausa()
     {
         panelOpciones.SetActive(false);
         panelPausa.SetActive(true);
-        Debug.Log("VOLVIENDO A PAUSA");
     }
 
     public void VolverMenu()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MenuPrincipal");
+    }
+
+    void OnDestroy()
+    {
+        Time.timeScale = 1f;
     }
 }
